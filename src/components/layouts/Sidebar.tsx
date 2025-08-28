@@ -62,6 +62,11 @@ const menuItems: MenuItem[] = [
     label: "Study Planner",
     path: "/study-assistant",
   },
+  {
+    icon: BookOpenCheck,
+    label: "Quiz Generator",
+    path: "/quiz-generator",
+  }
 ];
 
 

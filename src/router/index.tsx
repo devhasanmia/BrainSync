@@ -6,6 +6,7 @@ import { BudgetTracker } from "../pages/BudgetTracker";
 import { ScheduleTracker } from "../pages/ScheduleTracker";
 import { StudyPlanner } from "../pages/StudyPlanner";
 import { StudyAssistant } from "../pages/StudyAssistant";
+import { QuizGenerator } from "../pages/QuizGenerator";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         Component: StudyAssistant,
         path: "study-assistant",
+      },
+      {
+        Component: QuizGenerator,
+        path: "quiz-generator",
       }
     ]
   },
