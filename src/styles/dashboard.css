@@ -1,0 +1,146 @@
+/* Custom animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.6s ease-out both;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out both;
+}
+
+/* Sidebar gradient */
+.sidebar-gradient {
+  background: #1e293b;
+  border-right: 1px solid #334155;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Glass navigation */
+.glass-nav {
+  background: rgba(248, 250, 252, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+
+
+/* Navigation link styles */
+.nav-link {
+  position: relative;
+  overflow: hidden;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.nav-link:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.nav-link:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: left 0.6s ease-in-out;
+}
+
+.nav-link:hover::before {
+  left: 100%;
+}
+
+/* Custom scrollbar for sidebar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  transition: background 0.3s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Button hover effects */
+button {
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+button:hover::before {
+  width: 200px;
+  height: 200px;
+}
+
+.bg-white:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar-gradient {
+    width: 280px;
+  }
+}
+
+.nav-link:focus,
+.nav-link:focus-visible,
+.nav-link:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
