@@ -6,6 +6,9 @@ import {
   Gauge,
   Users,
   BadgeDollarSign,
+  Wallet,
+  CalendarRange,
+  BookOpenCheck,
 } from "lucide-react";
 import { useNavigate } from "react-router";
 
@@ -35,23 +38,32 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, isMobile, onClose }) => {
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const menuItems: MenuItem[] = [
-    { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
-    {
-      icon: BadgeDollarSign,
-      label: "Budget Tracker",
-      path: "/budget-tracker",
-      // subMenu: [
-      //   { icon: BarChart3, label: "Users", path: "/users" },
-      //   { label: "User List", path: "/users/list" },
-      // ],
-    },
-    {
-      icon: BadgeDollarSign,
-      label: "ScheduleTracker",
-      path: "/schedule-tracker",
-    }
-  ];
+
+
+const menuItems: MenuItem[] = [
+  { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
+  {
+    icon: Wallet,
+    label: "Budget Tracker",
+    path: "/budget-tracker",
+  },
+  {
+    icon: CalendarRange,
+    label: "Schedule Tracker",
+    path: "/schedule-tracker",
+  },
+  {
+    icon: BookOpenCheck,
+    label: "Study Planner",
+    path: "/study-planner",
+  },
+  {
+    icon: BookOpenCheck,
+    label: "Study Planner",
+    path: "/study-assistant",
+  },
+];
+
 
   return (
     <aside
