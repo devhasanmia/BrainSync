@@ -109,20 +109,6 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
               <Moon className="w-5 h-5" />
             )}
           </button>
-
-          {/* Notifications */}
-          <div className="relative">
-            <button
-              className="p-2 cursor-pointer text-slate-600 hover:text-blue-600 hover:bg-slate-100 rounded-lg transition-all duration-200"
-              aria-label="Notifications"
-            >
-              <Bell className="w-5 h-5" />
-            </button>
-            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
-              3
-            </span>
-          </div>
-
           {/* Profile dropdown */}
           <div className="flex items-center space-x-2 pl-2 relative cursor-pointer">
             <div className="hidden sm:block text-right">

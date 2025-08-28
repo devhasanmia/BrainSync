@@ -4,6 +4,8 @@ import {
   LogOut,
   ChevronRight,
   Gauge,
+  Users,
+  BadgeDollarSign,
 } from "lucide-react";
 import { useNavigate } from "react-router";
 
@@ -35,15 +37,20 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, isMobile, onClose }) => {
 
   const menuItems: MenuItem[] = [
     { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
-    // {
-    //   icon: Users,
-    //   label: "Users",
-    //   path: "/users",
-    //   subMenu: [
-    //     { icon: BarChart3, label: "Users", path: "/users" },
-    //     { label: "User List", path: "/users/list" },
-    //   ],
-    // }
+    {
+      icon: BadgeDollarSign,
+      label: "Budget Tracker",
+      path: "/budget-tracker",
+      // subMenu: [
+      //   { icon: BarChart3, label: "Users", path: "/users" },
+      //   { label: "User List", path: "/users/list" },
+      // ],
+    },
+    {
+      icon: BadgeDollarSign,
+      label: "ScheduleTracker",
+      path: "/schedule-tracker",
+    }
   ];
 
   return (

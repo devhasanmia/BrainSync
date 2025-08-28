@@ -2,7 +2,8 @@ import { createBrowserRouter } from "react-router";
 import Dashboard from "../pages/Dashboard";
 import AdminLayout from "../components/layouts/AdminLayout";
 import NotFound from "../pages/NotFound";
-import { User } from "lucide-react";
+import { BudgetTracker } from "../pages/BudgetTracker";
+import { ScheduleTracker } from "../pages/ScheduleTracker";
 
 const router = createBrowserRouter([
   {
@@ -14,8 +15,12 @@ const router = createBrowserRouter([
         path: "dashboard",
       },
       {
-        Component: User,
-        path: "users",
+        Component: BudgetTracker,
+        path: "budget-tracker",
+      },
+      {
+        Component: ScheduleTracker,
+        path: "schedule-tracker",
       }
     ]
   },
