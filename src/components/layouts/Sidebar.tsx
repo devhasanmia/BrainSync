@@ -4,11 +4,11 @@ import {
   LogOut,
   ChevronRight,
   Gauge,
-  Users,
-  BadgeDollarSign,
   Wallet,
   CalendarRange,
   BookOpenCheck,
+  Brain,
+  FileQuestion,
 } from "lucide-react";
 import { useNavigate } from "react-router";
 
@@ -49,7 +49,7 @@ const menuItems: MenuItem[] = [
   },
   {
     icon: CalendarRange,
-    label: "Schedule Tracker",
+    label: "Schedule",
     path: "/schedule-tracker",
   },
   {
@@ -58,12 +58,12 @@ const menuItems: MenuItem[] = [
     path: "/study-planner",
   },
   {
-    icon: BookOpenCheck,
-    label: "Study Planner",
+    icon: Brain, 
+    label: "Study Assistant",
     path: "/study-assistant",
   },
   {
-    icon: BookOpenCheck,
+    icon: FileQuestion,
     label: "Quiz Generator",
     path: "/quiz-generator",
   }
