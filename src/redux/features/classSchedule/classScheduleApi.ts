@@ -6,7 +6,7 @@ const classScheduleApi = RootApi.injectEndpoints({
       query: (data) => ({
         url: "/class-schedule",
         method: "POST",
-        data: data 
+        data: data
       }),
       invalidatesTags: ["schedule"],
     }),
@@ -17,15 +17,29 @@ const classScheduleApi = RootApi.injectEndpoints({
       }),
       providesTags: ["schedule"],
     }),
-      updateClassSchedule: builder.mutation({
-      query: ({id, payload}) => ({
+    getSingleSchedule: builder.query({
+      query: (id) => ({
+        url: `/class-schedule/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["schedule"],
+    }),
+    updateClassSchedule: builder.mutation({
+      query: ({ id, payload }) => ({
         url: `/class-schedule/${id}`,
         method: "PATCH",
-        data: payload 
+        data: payload
+      }),
+      invalidatesTags: ["schedule"],
+    }),
+    deleteClassSchedule: builder.mutation({
+      query: (id ) => ({
+        url: `/class-schedule/${id}`,
+        method: "DELETE",
       }),
       invalidatesTags: ["schedule"],
     }),
   }),
 });
 
-export const { useGetAllScheduleQuery, useCreateClassScheduleMutation } = classScheduleApi;
+export const { useGetAllScheduleQuery, useDeleteClassScheduleMutation, useUpdateClassScheduleMutation, useCreateClassScheduleMutation, useGetSingleScheduleQuery } = classScheduleApi;

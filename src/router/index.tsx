@@ -10,9 +10,8 @@ import { BudgetTracker } from "../pages/BudgetTracker";
 import { QuizGenerator } from "../pages/QuizGenerator";
 import Dashboard from "../pages/Dashboard";
 import AuthLayout from "../components/layouts/AuthLayout";
-import AddSchedule from "@/pages/AddSchedule";
-import EditSchedule from "@/pages/EditSchedule";
-
+import AddSchedule from "@/pages/classSchedule/AddSchedule";
+import EditSchedule from "@/pages/classSchedule/EditSchedule";
 
 const router = createBrowserRouter([
   {

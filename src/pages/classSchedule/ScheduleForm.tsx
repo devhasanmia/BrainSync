@@ -1,54 +1,21 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 import { MapPin, BookOpen, User, Clock } from "lucide-react";
-
-import LabeledInput from "../components/ui/InputWithLabel";
-import PrimaryButton from "../components/ui/PrimaryButton";
-import { useCreateClassScheduleMutation } from "@/redux/features/classSchedule/classScheduleApi";
-
-const days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-
-const colors = [
-  "#3B82F6",
-  "#10B981",
-  "#F59E0B",
-  "#EF4444",
-  "#8B5CF6",
-  "#06B6D4",
-  "#F97316",
-];
-
-const classScheduleValidationSchema = z.object({
-  subject: z
-    .string({ error: "Subject is required" })
-    .min(1, { error: "Subject is required" }),
-  instructor: z
-    .string({ error: "Instructor is required" })
-    .min(1, { error: "Instructor is required" }),
-  day: z.enum(days).optional(),
-  startTime: z
-    .string({ error: "Start time is required" })
-    .min(1, { error: "Start time is required" }),
-  endTime: z
-    .string({ error: "End time is required" })
-    .min(1, { error: "End time is required" }),
-  location: z.string().optional(),
-  color: z.enum(colors).optional(),
-});
+import { classScheduleValidationSchema } from "./classScheduleValidation";
+import { colors, days } from "./classSchedule.constent";
+import LabeledInput from "@/components/ui/InputWithLabel";
+import PrimaryButton from "@/components/ui/PrimaryButton";
 
 type ScheduleFormInputs = z.infer<typeof classScheduleValidationSchema>;
 
-const EditSchedule = () => {
+interface ScheduleFormProps {
+  mode: "add" | "edit";
+  defaultValues?: Partial<ScheduleFormInputs>;
+  onSubmit: SubmitHandler<ScheduleFormInputs>;
+}
+
+const ScheduleForm = ({ mode, defaultValues, onSubmit }: ScheduleFormProps) => {
   const {
     register,
     handleSubmit,
@@ -57,40 +24,30 @@ const EditSchedule = () => {
     formState: { errors },
   } = useForm<ScheduleFormInputs>({
     resolver: zodResolver(classScheduleValidationSchema),
-    defaultValues: {
-        instructor:"HASAn"
-    }
+    defaultValues,
   });
 
   const selectedColor = watch("color");
-
-  const [createSchedule] = useCreateClassScheduleMutation()
-  const onSubmit: SubmitHandler<ScheduleFormInputs> = async (data) => {
-    try {
-      const res = await createSchedule(data).unwrap()
-      toast.success(res.data.message || "Schedule added successfully!");
-    } catch (err) {
-      toast.error("Failed to add schedule.");
-    }
-  };
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-center from-blue-50 via-indigo-100 to-purple-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-6">
         <div className="w-full max-w-2xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-gray-700">
+
           {/* Header */}
           <div className="text-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center justify-center gap-2">
-              Update Class Schedule
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              {mode === "add" ? "Add New Class Schedule" : "Update Class Schedule"}
             </h1>
             <p className="text-gray-500 dark:text-gray-400 text-sm">
-              Fill in the details to Update a class schedule
+              {mode === "add"
+                ? "Fill in the details to create a class schedule"
+                : "Fill in the details to update the class schedule"}
             </p>
           </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            {/* Subject */}
             <LabeledInput
               label="Subject"
               name="subject"
@@ -101,7 +58,6 @@ const EditSchedule = () => {
               error={errors.subject?.message}
             />
 
-            {/* Instructor */}
             <LabeledInput
               label="Instructor"
               name="instructor"
@@ -129,9 +85,7 @@ const EditSchedule = () => {
                 ))}
               </select>
               {errors.day?.message && (
-                <p className="text-sm text-red-500 mt-1">
-                  {errors.day.message}
-                </p>
+                <p className="text-sm text-red-500 mt-1">{errors.day.message}</p>
               )}
             </div>
 
@@ -145,7 +99,6 @@ const EditSchedule = () => {
                 register={register}
                 error={errors.startTime?.message}
               />
-
               <LabeledInput
                 label="End Time"
                 name="endTime"
@@ -188,15 +141,14 @@ const EditSchedule = () => {
                 ))}
               </div>
               {errors.color?.message && (
-                <p className="text-sm text-red-500 mt-1">
-                  {errors.color.message}
-                </p>
+                <p className="text-sm text-red-500 mt-1">{errors.color.message}</p>
               )}
             </div>
 
-            {/* Submit */}
             <div className="flex justify-center pt-4">
-              <PrimaryButton type="submit">Update Schedule</PrimaryButton>
+              <PrimaryButton type="submit">
+                {mode === "add" ? "Save Schedule" : "Update Schedule"}
+              </PrimaryButton>
             </div>
           </form>
         </div>
@@ -205,4 +157,4 @@ const EditSchedule = () => {
   );
 };
 
-export default EditSchedule;
+export default ScheduleForm;

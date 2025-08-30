@@ -1,21 +1,22 @@
 import { Plus, Edit2, Trash2, Clock, MapPin, User } from "lucide-react";
 import type { Class } from "../types";
-import { useGetAllScheduleQuery } from "../redux/features/classSchedule/classScheduleApi";
+import { useDeleteClassScheduleMutation, useGetAllScheduleQuery } from "../redux/features/classSchedule/classScheduleApi";
 import Loading from "../components/ui/Loading";
 import { Link } from "react-router";
-
-const DAYS = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
+import { days } from "./classSchedule/classSchedule.constent";
+import { toast } from "sonner";
 
 export function ScheduleTracker() {
   const { data: schedules, isLoading } = useGetAllScheduleQuery("");
+  const [deleteClassSchedule] = useDeleteClassScheduleMutation();
+  const deleteSchedule = async (id: string) => {
+    try {
+      const res = await deleteClassSchedule(id).unwrap();
+      toast.success(res.data.message || "Schedule Deleted successfully!");
+    } catch {
+      toast.error("Failed to add schedule.");
+    }
+  }
   const classes: Class[] =
     schedules?.data?.map((item: any) => ({
       id: item._id,
@@ -58,7 +59,7 @@ export function ScheduleTracker() {
 
       {/* Weekly Schedule Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-        {DAYS.map((day) => (
+        {days.map((day) => (
           <div
             key={day}
             className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-md border border-gray-200 dark:border-gray-700"
@@ -82,7 +83,7 @@ export function ScheduleTracker() {
                       >
                         <Edit2 className="h-4 w-4" />
                       </Link>
-                      <button className="p-1 text-white/80 hover:text-white transition-colors">
+                      <button onClick={() => deleteSchedule(classItem.id)} className="p-1 text-white/80 hover:text-white transition-colors">
                         <Trash2 className="h-4 w-4" />
                       </button>
                     </div>
