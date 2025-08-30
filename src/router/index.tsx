@@ -10,6 +10,7 @@ import { BudgetTracker } from "../pages/BudgetTracker";
 import { QuizGenerator } from "../pages/QuizGenerator";
 import Dashboard from "../pages/Dashboard";
 import AuthLayout from "../components/layouts/AuthLayout";
+import AddSchedule from "@/pages/AddSchedule";
 
 
 const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "schedule-tracker",
         element: <ScheduleTracker />,
+      },
+      {
+        path: "add-schedule",
+        element: <AddSchedule/>
       },
       {
         path: "study-planner",

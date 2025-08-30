@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { HelpCircle, CheckCircle, XCircle, RotateCcw, Plus, Trash2 } from 'lucide-react';
 import type { Question } from '../types';
 
@@ -19,8 +19,7 @@ interface QuizState {
 const SUBJECTS = ['Mathematics', 'Science', 'History', 'Literature', 'Geography', 'Computer Science', 'Other'];
 
 export function QuizGenerator() {
-  const [questions, setQuestions] = useState<Question[]>([]);
-  const [customQuestions, setCustomQuestions] = useState<Question[]>([]);
+  const [customQuestions, _setCustomQuestions] = useState<Question[]>([]);
   const [isCreatingQuestion, setIsCreatingQuestion] = useState(false);
   const [quizSettings, setQuizSettings] = useState<QuizSettings>({
     subject: 'Mathematics',
