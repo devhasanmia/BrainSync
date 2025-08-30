@@ -2,8 +2,15 @@ import { createBrowserRouter } from "react-router";
 import App from "../App";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import AdminLayout from "../components/layouts/AdminLayout";
 import { ProtecctedRoute } from "../components/layouts/ProtecctedRoute";
+import { ScheduleTracker } from "../pages/ScheduleTracker";
+import { StudyPlanner } from "../pages/StudyPlanner";
+import { StudyAssistant } from "../pages/StudyAssistant";
+import { BudgetTracker } from "../pages/BudgetTracker";
+import { QuizGenerator } from "../pages/QuizGenerator";
+import Dashboard from "../pages/Dashboard";
+import AuthLayout from "../components/layouts/AuthLayout";
+
 
 const router = createBrowserRouter([
   {
@@ -26,7 +33,33 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    Component: ProtecctedRoute(AdminLayout),
+    element: <ProtecctedRoute Component={AuthLayout} />,
+    children: [
+      {
+        path: "",
+        element: <Dashboard />,
+      },
+      {
+        path: "budget-tracker",
+        element: <BudgetTracker />,
+      },
+      {
+        path: "schedule-tracker",
+        element: <ScheduleTracker />,
+      },
+      {
+        path: "study-planner",
+        element: <StudyPlanner />,
+      },
+      {
+        path: "study-assistant",
+        element: <StudyAssistant />,
+      },
+      {
+        path: "quiz-generator",
+        element: <QuizGenerator />,
+      },
+    ],
   },
 ]);
 
