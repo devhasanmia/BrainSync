@@ -11,6 +11,7 @@ import { QuizGenerator } from "../pages/QuizGenerator";
 import Dashboard from "../pages/Dashboard";
 import AuthLayout from "../components/layouts/AuthLayout";
 import AddSchedule from "@/pages/AddSchedule";
+import EditSchedule from "@/pages/EditSchedule";
 
 
 const router = createBrowserRouter([
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "add-schedule",
         element: <AddSchedule/>
+      },
+      {
+        path: "edit-schedule/:id",
+        element: <EditSchedule/>
       },
       {
         path: "study-planner",

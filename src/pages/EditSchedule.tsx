@@ -48,7 +48,7 @@ const classScheduleValidationSchema = z.object({
 
 type ScheduleFormInputs = z.infer<typeof classScheduleValidationSchema>;
 
-const AddSchedule = () => {
+const EditSchedule = () => {
   const {
     register,
     handleSubmit,
@@ -57,6 +57,9 @@ const AddSchedule = () => {
     formState: { errors },
   } = useForm<ScheduleFormInputs>({
     resolver: zodResolver(classScheduleValidationSchema),
+    defaultValues: {
+        instructor:"HASAn"
+    }
   });
 
   const selectedColor = watch("color");
@@ -78,10 +81,10 @@ const AddSchedule = () => {
           {/* Header */}
           <div className="text-center mb-6">
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center justify-center gap-2">
-              Add New Class Schedule
+              Update Class Schedule
             </h1>
             <p className="text-gray-500 dark:text-gray-400 text-sm">
-              Fill in the details to create a class schedule
+              Fill in the details to Update a class schedule
             </p>
           </div>
 
@@ -193,7 +196,7 @@ const AddSchedule = () => {
 
             {/* Submit */}
             <div className="flex justify-center pt-4">
-              <PrimaryButton type="submit">Save Schedule</PrimaryButton>
+              <PrimaryButton type="submit">Update Schedule</PrimaryButton>
             </div>
           </form>
         </div>
@@ -202,4 +205,4 @@ const AddSchedule = () => {
   );
 };
 
-export default AddSchedule;
+export default EditSchedule;

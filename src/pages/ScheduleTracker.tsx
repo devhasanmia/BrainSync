@@ -2,6 +2,7 @@ import { Plus, Edit2, Trash2, Clock, MapPin, User } from "lucide-react";
 import type { Class } from "../types";
 import { useGetAllScheduleQuery } from "../redux/features/classSchedule/classScheduleApi";
 import Loading from "../components/ui/Loading";
+import { Link } from "react-router";
 
 const DAYS = [
   "Monday",
@@ -46,12 +47,13 @@ export function ScheduleTracker() {
             Manage your weekly class schedule
           </p>
         </div>
-        <button
+        <Link
+          to={"/dashboard/add-schedule"}
           className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
         >
           <Plus className="h-4 w-4" />
           <span>Add Class</span>
-        </button>
+        </Link>
       </div>
 
       {/* Weekly Schedule Grid */}
@@ -74,16 +76,13 @@ export function ScheduleTracker() {
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-medium text-sm">{classItem.subject}</h4>
                     <div className="flex items-center gap-1">
-                      <button
-                        // onClick={() => handleEdit(classItem)}
+                      <Link
+                        to={`/dashboard/edit-schedule/${classItem.id}`}
                         className="p-1 text-white/80 hover:text-white transition-colors"
                       >
                         <Edit2 className="h-4 w-4" />
-                      </button>
-                      <button
-                        // onClick={() => handleDelete(classItem.id)}
-                        className="p-1 text-white/80 hover:text-white transition-colors"
-                      >
+                      </Link>
+                      <button className="p-1 text-white/80 hover:text-white transition-colors">
                         <Trash2 className="h-4 w-4" />
                       </button>
                     </div>
