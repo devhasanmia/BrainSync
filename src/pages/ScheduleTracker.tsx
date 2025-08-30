@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Plus, Edit2, Trash2, Clock, MapPin, User } from "lucide-react";
 import type { Class } from "../types";
 import { useGetAllScheduleQuery } from "../redux/features/classSchedule/classScheduleApi";
+import Loading from "../components/ui/Loading";
 
 const DAYS = [
   "Monday",
@@ -93,7 +94,7 @@ export function ScheduleTracker() {
   };
 
   if (isLoading) {
-    return <p className="text-center text-gray-500">Loading schedules...</p>;
+    return <Loading />;
   }
 
   return (
