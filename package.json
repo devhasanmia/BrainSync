@@ -10,16 +10,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.1",
     "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/vite": "^4.1.12",
     "axios": "^1.11.0",
+    "dotenv": "^17.2.1",
     "lucide-react": "^0.542.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-hook-form": "^7.62.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.8.2",
     "recharts": "^3.1.2",
-    "tailwindcss": "^4.1.12"
+    "sonner": "^2.0.7",
+    "tailwindcss": "^4.1.12",
+    "zod": "^4.1.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",

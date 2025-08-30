@@ -3,7 +3,7 @@ import "../../styles/dashboard.css";
 import { Outlet } from "react-router";
 import Sidebar from "./Sidebar";
 import TopNavigation from "./TopNavigation";
-const AdminLayout = () => {
+const AuthLayout = () => {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
@@ -70,4 +70,4 @@ const AdminLayout = () => {
     );
 }
 
-export default AdminLayout;
+export default AuthLayout;

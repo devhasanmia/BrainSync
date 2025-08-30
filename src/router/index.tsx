@@ -1,49 +1,33 @@
 import { createBrowserRouter } from "react-router";
-import Dashboard from "../pages/Dashboard";
+import App from "../App";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 import AdminLayout from "../components/layouts/AdminLayout";
-import NotFound from "../pages/NotFound";
-import { BudgetTracker } from "../pages/BudgetTracker";
-import { ScheduleTracker } from "../pages/ScheduleTracker";
-import { StudyPlanner } from "../pages/StudyPlanner";
-import { StudyAssistant } from "../pages/StudyAssistant";
-import { QuizGenerator } from "../pages/QuizGenerator";
+import { ProtecctedRoute } from "../components/layouts/ProtecctedRoute";
 
 const router = createBrowserRouter([
   {
-    Component: AdminLayout,
     path: "/",
+    element: <App />,
     children: [
       {
-        Component: Dashboard,
-        path: "dashboard",
+        path: "",
+        element: <Login />,
       },
       {
-        Component: BudgetTracker,
-        path: "budget-tracker",
+        path: "login",
+        element: <Login />,
       },
       {
-        Component: ScheduleTracker,
-        path: "schedule-tracker",
+        path: "register",
+        element: <Register />,
       },
-      {
-        Component: StudyPlanner,
-        path: "study-planner",
-      },
-      {
-        Component: StudyAssistant,
-        path: "study-assistant",
-      },
-      {
-        Component: QuizGenerator,
-        path: "quiz-generator",
-      }
-    ]
+    ],
   },
   {
-    path: "*",
-    Component: NotFound
-  }
+    path: "/dashboard",
+    Component: ProtecctedRoute(AdminLayout),
+  },
 ]);
 
-
-export default router
+export default router;

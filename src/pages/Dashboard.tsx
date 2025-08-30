@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-import { Calendar, DollarSign, BookOpen, Target, TrendingUp, Clock } from 'lucide-react';
+import { useState } from 'react';
+import { Calendar, DollarSign,Target, TrendingUp, Clock } from 'lucide-react';
 import { StatsCard } from '../components/ui/StatsCard';
 import type { Class } from '../types';
+import { useProfileQuery } from '../redux/features/auth/authApi';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -15,7 +16,8 @@ const Dashboard = () => {
     studyStreak: 0,
   });
   const [upcomingClasses, setUpcomingClasses] = useState<Class[]>([]);
-
+  const {data: authUser} = useProfileQuery("");
+  console.log(authUser)
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
