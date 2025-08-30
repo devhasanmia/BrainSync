@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Menu, Bell, Moon, Sun, User, ChevronDown } from "lucide-react";
+import { useProfileQuery } from "../../redux/features/auth/authApi";
 
 interface TopNavigationProps {
   onToggleSidebar: () => void;
@@ -26,7 +27,6 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
   const [selectedLang, setSelectedLang] = useState(languages[0]);
   const langRef = useRef<HTMLDivElement>(null);
 
-  // Close language dropdown on outside click
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (langRef.current && !langRef.current.contains(event.target as Node)) {
@@ -43,6 +43,7 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
     setSelectedLang(lang);
     setIsLangOpen(false);
   };
+  const {data: profile} = useProfileQuery("")
 
   return (
     <header className="glass-nav sticky top-0 z-30">
@@ -112,8 +113,8 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
           {/* Profile dropdown */}
           <div className="flex items-center space-x-2 pl-2 relative cursor-pointer">
             <div className="hidden sm:block text-right">
-              <p className="text-sm font-medium text-slate-900">SUPER ADMIN</p>
-              <p className="text-xs text-slate-500">Administrator</p>
+              <p className="text-sm font-medium text-slate-900">{profile?.data?.name}</p>
+              <p className="text-xs text-slate-500">{profile?.data?.email}</p>
             </div>
             <button
               onClick={() => setIsProfileOpen(!isProfileOpen)}

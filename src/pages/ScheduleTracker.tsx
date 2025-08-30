@@ -12,15 +12,6 @@ const DAYS = [
   "Saturday",
   "Sunday",
 ];
-const COLORS = [
-  "#3B82F6",
-  "#10B981",
-  "#F59E0B",
-  "#EF4444",
-  "#8B5CF6",
-  "#06B6D4",
-  "#F97316",
-];
 
 interface ClassFormData {
   subject: string;
@@ -42,7 +33,7 @@ export function ScheduleTracker() {
     startTime: "",
     endTime: "",
     location: "",
-    color: COLORS[0],
+    color: "",
   });
 
   const { data: schedules, isLoading } = useGetAllScheduleQuery("");
@@ -55,7 +46,7 @@ export function ScheduleTracker() {
       startTime: item.startTime,
       endTime: item.endTime,
       location: item.location,
-      color: item.color || COLORS[0],
+      color: item.color || "",
     })) || [];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -89,7 +80,7 @@ export function ScheduleTracker() {
       startTime: "",
       endTime: "",
       location: "",
-      color: COLORS[0],
+      color: "",
     });
     setEditingClass(null);
     setIsFormOpen(false);
@@ -137,30 +128,28 @@ export function ScheduleTracker() {
               {getClassesForDay(day).map((classItem) => (
                 <div
                   key={classItem.id}
-                  className="p-3 rounded-xl border-l-4 bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors shadow-sm"
-                  style={{ borderLeftColor: classItem.color }}
+                  className="p-3 rounded-xl text-white shadow-sm transition-colors hover:brightness-105"
+                  style={{ backgroundColor: classItem.color }} // dynamic bg color
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium text-sm text-gray-900 dark:text-gray-100">
-                      {classItem.subject}
-                    </h4>
+                    <h4 className="font-medium text-sm">{classItem.subject}</h4>
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => handleEdit(classItem)}
-                        className="p-1 text-gray-500 hover:text-blue-500 transition-colors"
+                        className="p-1 text-white/80 hover:text-white transition-colors"
                       >
                         <Edit2 className="h-4 w-4" />
                       </button>
                       <button
                         onClick={() => handleDelete(classItem.id)}
-                        className="p-1 text-gray-500 hover:text-red-500 transition-colors"
+                        className="p-1 text-white/80 hover:text-white transition-colors"
                       >
                         <Trash2 className="h-4 w-4" />
                       </button>
                     </div>
                   </div>
 
-                  <div className="text-xs text-gray-600 dark:text-gray-300 space-y-1">
+                  <div className="text-xs text-white/90 space-y-1">
                     <div className="flex items-center gap-1">
                       <Clock className="h-3 w-3" /> {classItem.startTime} -{" "}
                       {classItem.endTime}
@@ -289,7 +278,7 @@ export function ScheduleTracker() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Color
                 </label>
-                <div className="flex space-x-2">
+                {/* <div className="flex space-x-2">
                   {COLORS.map((color) => (
                     <button
                       key={color}
@@ -303,7 +292,7 @@ export function ScheduleTracker() {
                       style={{ backgroundColor: color }}
                     />
                   ))}
-                </div>
+                </div> */}
               </div>
 
               <div className="flex space-x-3 pt-4">
