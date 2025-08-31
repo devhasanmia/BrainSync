@@ -3,7 +3,6 @@ import { Plus, CheckCircle, Clock, AlertCircle, Edit2, Trash2, Calendar } from '
 import type { StudyTask } from '../types';
 
 const SUBJECTS = ['Mathematics', 'Science', 'History', 'Literature', 'Geography', 'Computer Science', 'Other'];
-const PRIORITIES = ['low', 'medium', 'high'] as const;
 
 // Demo data
 const DEMO_TASKS: StudyTask[] = [

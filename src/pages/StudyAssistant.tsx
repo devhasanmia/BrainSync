@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Play,
   Pause,
@@ -9,6 +9,7 @@ import {
   Flame,
   Award,
 } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface StudyTask {
   id: string;
