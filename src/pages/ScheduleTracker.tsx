@@ -5,6 +5,7 @@ import Loading from "../components/ui/Loading";
 import { Link } from "react-router";
 import { days } from "./classSchedule/classSchedule.constent";
 import { toast } from "sonner";
+import PageHeader from "@/components/ui/PageHeader";
 
 export function ScheduleTracker() {
   const { data: schedules, isLoading } = useGetAllScheduleQuery("");
@@ -41,21 +42,13 @@ export function ScheduleTracker() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-800">Class Schedule</h1>
-          <p className="text-gray-600 mt-1">
-            Manage your weekly class schedule
-          </p>
-        </div>
-        <Link
-          to={"/dashboard/add-schedule"}
-          className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          <Plus className="h-4 w-4" />
-          <span>Add Class</span>
-        </Link>
-      </div>
+      <PageHeader
+        title="Class Schedule"
+        subtitle="Manage your weekly class schedule"
+        buttonText="Add Class"
+        buttonLink="/dashboard/add-schedule"
+        icon={Plus}
+      />
 
       {/* Weekly Schedule Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">

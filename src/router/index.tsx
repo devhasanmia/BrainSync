@@ -12,6 +12,7 @@ import Dashboard from "../pages/Dashboard";
 import AuthLayout from "../components/layouts/AuthLayout";
 import AddSchedule from "@/pages/classSchedule/AddSchedule";
 import EditSchedule from "@/pages/classSchedule/EditSchedule";
+import AddBudget from "@/pages/budgetTracker/AddBudget";
 
 const router = createBrowserRouter([
   {
@@ -45,16 +46,20 @@ const router = createBrowserRouter([
         element: <BudgetTracker />,
       },
       {
+        path: "add-budget",
+        element: <AddBudget />,
+      },
+      {
         path: "schedule-tracker",
         element: <ScheduleTracker />,
       },
       {
         path: "add-schedule",
-        element: <AddSchedule/>
+        element: <AddSchedule />
       },
       {
         path: "edit-schedule/:id",
-        element: <EditSchedule/>
+        element: <EditSchedule />
       },
       {
         path: "study-planner",

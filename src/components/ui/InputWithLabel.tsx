@@ -9,7 +9,8 @@ interface LabeledInputProps {
   placeholder?: string;
   icon?: React.ReactNode;
   register: UseFormRegister<any>;
-  error?: string; // <-- এখানে FieldError না দিয়ে শুধু string রাখো
+  error?: string;
+  required?: boolean;
 }
 
 const LabeledInput: React.FC<LabeledInputProps> = ({
@@ -20,6 +21,7 @@ const LabeledInput: React.FC<LabeledInputProps> = ({
   icon,
   register,
   error,
+  required
 }) => {
   return (
     <div className="mb-4">
@@ -46,6 +48,7 @@ const LabeledInput: React.FC<LabeledInputProps> = ({
             dark:bg-gray-700 dark:text-white placeholder-gray-400 
             transition outline-none shadow-sm`}
           {...register(name)}
+          required = {required}
         />
       </div>
       {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
