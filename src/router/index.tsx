@@ -13,6 +13,8 @@ import AuthLayout from "../components/layouts/AuthLayout";
 import AddSchedule from "@/pages/classSchedule/AddSchedule";
 import EditSchedule from "@/pages/classSchedule/EditSchedule";
 import AddBudget from "@/pages/budgetTracker/AddBudget";
+import AddStudyTask from "@/pages/studyPlanner/addStudyTask";
+import EditStudyTask from "@/pages/studyPlanner/EditStudyTask";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +66,14 @@ const router = createBrowserRouter([
       {
         path: "study-planner",
         element: <StudyPlanner />,
+      },
+      {
+        path: "add-study-task",
+        element: <AddStudyTask/>
+      },
+      {
+        path: "edit-study-task/:id",
+        element: <EditStudyTask/>
       },
       {
         path: "study-assistant",

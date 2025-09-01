@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { CheckCircle, Clock, AlertCircle, Trash2, Calendar } from 'lucide-react';
+import { CheckCircle, Clock, AlertCircle, Trash2, Calendar, Plus, Edit } from 'lucide-react';
 import type { StudyTask } from '../types';
 import {
     useGetAllStudyPlannerQuery,
     useDeleteStudyTaskMutation,
     useUpdateStudyTaskMutation
 } from '@/redux/features/studyPlanner/studyPlannerApi';
+import PageHeader from '@/components/ui/PageHeader';
+import { Link } from 'react-router';
 
 
 export function StudyPlanner() {
@@ -76,12 +78,14 @@ export function StudyPlanner() {
     return (
         <div className="space-y-6">
             {/* Header */}
-            <div className="flex items-center justify-between">
-                <div>
-                    <h1 className="text-3xl font-bold text-gray-800">Study Planner</h1>
-                    <p className="text-gray-600 mt-1">Break down your study goals into manageable tasks</p>
-                </div>
-            </div>
+            <PageHeader
+                title="Study Planner"
+                subtitle="Organize and track your study tasks"
+                buttonText="Add Task"
+                buttonLink="/dashboard/add-study-task"
+                icon={Plus}
+            />
+
 
             {/* Filters */}
             <div className="flex space-x-2">
@@ -145,13 +149,23 @@ export function StudyPlanner() {
                                     <div className="flex items-start space-x-4 flex-1">
                                         <button
                                             onClick={() => toggleTaskCompletion(task)}
-                                            className={`mt-1 p-1 rounded-full transition-colors ${task.completed
-                                                ? 'text-green-600 bg-green-100'
-                                                : 'text-gray-400 hover:text-green-600 hover:bg-green-50'
-                                                }`}
-                                        >
-                                            <CheckCircle className={`h-5 w-5 ${task.completed ? 'fill-current' : ''}`} />
-                                        </button>
+                                            className={`
+    mt-1 w-8 h-8 rounded-full
+    transition-colors duration-300
+    border-2 border-gray-300
+    ${task.completed
+                                                    ? 'bg-green-500 border-green-600'
+                                                    : 'bg-white hover:bg-green-100 border-gray-300'
+                                                }
+    shadow-sm hover:shadow-md
+  `}
+                                            title={task.completed ? "Mark as Incomplete" : "Mark as Complete"}
+                                        />
+
+
+
+
+
 
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center space-x-3 mb-2">
@@ -195,7 +209,13 @@ export function StudyPlanner() {
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center space-x-2 ml-4">
+                                    <div className="flex items-center space-x-2">
+                                        <Link
+                                            to={`/dashboard/edit-study-task/${task.id}`}
+                                            className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                        >
+                                            <Edit className="h-4 w-4" />
+                                        </Link>
                                         <button
                                             onClick={() => handleDelete(task.id)}
                                             className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
