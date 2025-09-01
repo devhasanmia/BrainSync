@@ -7,7 +7,6 @@ import { ScheduleTracker } from "../pages/ScheduleTracker";
 import { StudyPlanner } from "../pages/StudyPlanner";
 import { StudyAssistant } from "../pages/StudyAssistant";
 import { BudgetTracker } from "../pages/BudgetTracker";
-import { QuizGenerator } from "../pages/QuizGenerator";
 import Dashboard from "../pages/Dashboard";
 import AuthLayout from "../components/layouts/AuthLayout";
 import AddSchedule from "@/pages/classSchedule/AddSchedule";
@@ -15,6 +14,7 @@ import EditSchedule from "@/pages/classSchedule/EditSchedule";
 import AddBudget from "@/pages/budgetTracker/AddBudget";
 import AddStudyTask from "@/pages/studyPlanner/addStudyTask";
 import EditStudyTask from "@/pages/studyPlanner/EditStudyTask";
+import { QuizGenerator } from "@/pages/QuizGenerator";
 
 const router = createBrowserRouter([
   {
@@ -69,11 +69,11 @@ const router = createBrowserRouter([
       },
       {
         path: "add-study-task",
-        element: <AddStudyTask/>
+        element: <AddStudyTask />
       },
       {
         path: "edit-study-task/:id",
-        element: <EditStudyTask/>
+        element: <EditStudyTask />
       },
       {
         path: "study-assistant",
@@ -81,7 +81,7 @@ const router = createBrowserRouter([
       },
       {
         path: "quiz-generator",
-        element: <QuizGenerator />,
+        element: < QuizGenerator />,
       },
     ],
   },

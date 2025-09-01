@@ -112,15 +112,12 @@ const StudyTaskForm = ({ mode, defaultValues, onSubmit }: StudyTaskFormProps) =>
             <LabeledInput
               label="Estimated Hours"
               name="estimatedHours"
-              type="text"
+              type="number"
               placeholder="Optional, e.g. 2h"
               icon={<Clock />}
               register={register}
               error={errors.estimatedHours?.message}
             />
-
-            
-
             <div className="flex justify-center pt-4">
               <PrimaryButton type="submit">
                 {mode === "add" ? "Save Task" : "Update Task"}

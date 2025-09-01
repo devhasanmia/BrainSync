@@ -13,7 +13,7 @@ const AddStudyTask = () => {
     try {
       const res = await createTask(data).unwrap();
       toast.success(res.data.message || "Task added successfully!");
-      navigate("/dashboard/study-planner"); // তোমার স্টাডি প্ল্যানার পেজ লিঙ্ক
+      navigate("/dashboard/study-planner");
     } catch {
       toast.error("Failed to add task.");
     }
