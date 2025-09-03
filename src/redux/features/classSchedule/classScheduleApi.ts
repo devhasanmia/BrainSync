@@ -17,6 +17,13 @@ const classScheduleApi = RootApi.injectEndpoints({
       }),
       providesTags: ["schedule"],
     }),
+    getTodaySchedule: builder.query({
+      query: () => ({
+        url: "/class-schedule/today",
+        method: "GET",
+      }),
+      providesTags: ["schedule"],
+    }),
     getSingleSchedule: builder.query({
       query: (id) => ({
         url: `/class-schedule/${id}`,
@@ -42,4 +49,4 @@ const classScheduleApi = RootApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllScheduleQuery, useDeleteClassScheduleMutation, useUpdateClassScheduleMutation, useCreateClassScheduleMutation, useGetSingleScheduleQuery } = classScheduleApi;
+export const { useGetAllScheduleQuery, useGetTodayScheduleQuery, useDeleteClassScheduleMutation, useUpdateClassScheduleMutation, useCreateClassScheduleMutation, useGetSingleScheduleQuery } = classScheduleApi;

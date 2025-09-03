@@ -3,8 +3,11 @@ import { Calendar, DollarSign,Target, TrendingUp, Clock } from 'lucide-react';
 import { StatsCard } from '../components/ui/StatsCard';
 import type { Class } from '../types';
 import { useProfileQuery } from '../redux/features/auth/authApi';
+import { useGetTodayScheduleQuery } from '@/redux/features/classSchedule/classScheduleApi';
 
 const Dashboard = () => {
+  const {data: todayClass} = useGetTodayScheduleQuery("");
+
   const [stats, setStats] = useState({
     totalClasses: 0,
     todayClasses: 0,
@@ -15,9 +18,6 @@ const Dashboard = () => {
     studyHours: 0,
     studyStreak: 0,
   });
-  const [upcomingClasses, setUpcomingClasses] = useState<Class[]>([]);
-  const {data: authUser} = useProfileQuery("");
-  console.log(authUser)
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
@@ -40,10 +40,10 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatsCard
           title="Today's Classes"
-          value={stats.todayClasses}
+          value={todayClass?.data.length}
           icon={Calendar}
           color="blue"
-          subtitle={`${stats.totalClasses} total classes`}
+          subtitle={`${todayClass?.data.length} total classes`}
         />
         <StatsCard
           title="Current Budget"
@@ -75,14 +75,14 @@ const Dashboard = () => {
             <Calendar className="h-5 w-5 text-gray-500" />
           </div>
 
-          {upcomingClasses.length === 0 ? (
+          {todayClass?.data.length === 0 ? (
             <div className="text-center py-8">
               <Calendar className="h-12 w-12 text-gray-300 mx-auto mb-3" />
               <p className="text-gray-500">No classes scheduled for today</p>
             </div>
           ) : (
             <div className="space-y-3">
-              {upcomingClasses.map((classItem) => (
+              {todayClass?.data?.map((classItem: any) => (
                 <div
                   key={classItem.id}
                   className="flex items-center space-x-4 p-4 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors"
