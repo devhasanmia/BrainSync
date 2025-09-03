@@ -2,6 +2,7 @@ import { useState, type ChangeEvent } from "react";
 import { HelpCircle, Plus } from "lucide-react";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import PageHeader from "@/components/ui/PageHeader";
+import QuizResultCard from "./exam/QuizResultCard";
 
 type Difficulty = "easy" | "medium" | "hard";
 type QuestionType = "mcq" | "short" | "truefalse" | "mixed";
@@ -44,7 +45,7 @@ export default function QuizSettingsForm() {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-5">
-        
+
         {/* Left Column - Generator (1/3 on desktop) */}
         <div className="md:col-span-1 bg-white rounded-xl border border-gray-200 shadow-sm p-4 sm:p-6 space-y-6">
           <h2 className="text-xl font-bold text-gray-800">Quiz Settings</h2>
@@ -110,13 +111,9 @@ export default function QuizSettingsForm() {
             Generate Quiz
           </PrimaryButton>
         </div>
-
-        {/* Right Column - Result (2/3 on desktop) */}
         <div className="md:col-span-2 bg-gray-50 rounded-xl border border-gray-200 shadow-sm p-4 sm:p-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Result</h2>
-          <pre className="text-sm text-gray-700 whitespace-pre-wrap break-words">
-            {result ? result : "❌ Not Found"}
-          </pre>
+          <QuizResultCard />
         </div>
       </div>
     </div>
