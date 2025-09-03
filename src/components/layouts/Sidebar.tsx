@@ -64,7 +64,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, isMobile, onClose }) => {
     },
     {
       icon: FileQuestion,
-      label: "Quiz Generator",
+      label: "Exam Q&A generator",
       path: "/dashboard/quiz-generator",
     },
   ];

@@ -14,7 +14,8 @@ import EditSchedule from "@/pages/classSchedule/EditSchedule";
 import AddBudget from "@/pages/budgetTracker/AddBudget";
 import AddStudyTask from "@/pages/studyPlanner/addStudyTask";
 import EditStudyTask from "@/pages/studyPlanner/EditStudyTask";
-import { QuizGenerator } from "@/pages/QuizGenerator";
+import AddQuestion from "@/pages/AddQuestion";
+import QuizSettingsForm from "@/pages/ExamQ&AGenerator";
 
 const router = createBrowserRouter([
   {
@@ -80,8 +81,12 @@ const router = createBrowserRouter([
         element: <StudyAssistant />,
       },
       {
+        path: "add-question",
+        element: < AddQuestion />,
+      },
+      {
         path: "quiz-generator",
-        element: < QuizGenerator />,
+        element: < QuizSettingsForm />,
       },
     ],
   },
