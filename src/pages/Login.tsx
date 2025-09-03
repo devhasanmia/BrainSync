@@ -1,4 +1,4 @@
-import { ArrowUpRightSquare, Lock, Mail } from "lucide-react";
+import { Lock, Mail } from "lucide-react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import LabeledInput from "../components/ui/InputWithLabel";
 import PrimaryButton from "../components/ui/PrimaryButton";

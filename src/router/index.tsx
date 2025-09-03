@@ -86,7 +86,7 @@ const router = createBrowserRouter([
       },
       {
         path: "quiz-generator",
-        element: < QuizSettingsForm />,
+        element: <QuizSettingsForm/>,
       },
     ],
   },

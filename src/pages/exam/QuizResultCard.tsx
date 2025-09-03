@@ -28,36 +28,11 @@ export interface TrueFalseQuestion extends BaseQuestion {
 
 export type IQuestion = MCQQuestion | ShortQuestion | TrueFalseQuestion;
 
-const questions: IQuestion[] = [
-  {
-    type: "mcq",
-    difficulty: "easy",
-    question: "What is the capital of France?",
-    options: ["Paris", "London", "Berlin", "Rome"],
-    answer: "Paris",
-  },
-  {
-    type: "truefalse",
-    difficulty: "easy",
-    question: "2 + 2 = 4",
-    answer: "true",
-  },
-  {
-    type: "short",
-    difficulty: "medium",
-    question: "Who developed the theory of relativity?",
-    answer: "Albert Einstein",
-  },
-  {
-    type: "mcq",
-    difficulty: "hard",
-    question: "Which planet is known as the Red Planet?",
-    options: ["Earth", "Mars", "Venus", "Jupiter"],
-    answer: "Mars",
-  },
-];
+interface QuizResultListProps {
+  questions: IQuestion[];
+}
 
-export default function QuizResultList() {
+export default function QuizResultList({ questions }: QuizResultListProps) {
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string | null>>({});
   const [shortInputs, setShortInputs] = useState<Record<number, string>>({});
 
@@ -83,51 +58,40 @@ export default function QuizResultList() {
             selected?.trim().toLowerCase() === q.answer.trim().toLowerCase();
 
           return (
-            <div
-              key={idx}
-              className="p-6 bg-white rounded-xl shadow-md border border-gray-200"
-            >
-              {/* Header */}
+            <div key={idx} className="p-6 bg-white rounded-xl shadow-md border border-gray-200">
               <div className="flex justify-between items-center mb-3">
-                <h3 className="text-md font-bold text-gray-800">
-                  Question {idx + 1}
-                </h3>
-                <span
-                  className={`text-xs px-3 py-1 rounded-full font-medium ${
+                <h3 className="text-md font-bold text-gray-800">Question {idx + 1}</h3>
+                <span className={`text-xs px-3 py-1 rounded-full font-medium ${
                     q.difficulty === "easy"
                       ? "bg-green-100 text-green-600"
                       : q.difficulty === "medium"
                       ? "bg-yellow-100 text-yellow-600"
                       : "bg-red-100 text-red-600"
-                  }`}
-                >
+                  }`}>
                   {q.difficulty.toUpperCase()}
                 </span>
               </div>
 
-              {/* Question */}
               <p className="text-gray-700 text-base font-medium mb-4">{q.question}</p>
 
-              {/* Options */}
-              {q.type === "mcq" &&
-                q.options.map((opt, i) => (
-                  <button
-                    key={i}
-                    onClick={() => handleSelect(idx, opt)}
-                    disabled={!!selected}
-                    className={`w-full text-left px-4 py-2 mb-2 rounded-lg border transition-colors ${
-                      selected
-                        ? opt === q.answer
-                          ? "border-green-500 bg-green-50 text-green-700 font-semibold"
-                          : opt === selected
-                          ? "border-red-500 bg-red-50 text-red-700"
-                          : "border-gray-300 bg-gray-50 text-gray-500"
-                        : "border-gray-300 bg-gray-50 hover:border-blue-400 hover:bg-blue-50"
-                    }`}
-                  >
-                    {opt}
-                  </button>
-                ))}
+              {q.type === "mcq" && q.options.map((opt, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleSelect(idx, opt)}
+                  disabled={!!selected}
+                  className={`w-full text-left px-4 py-2 mb-2 rounded-lg border transition-colors ${
+                    selected
+                      ? opt === q.answer
+                        ? "border-green-500 bg-green-50 text-green-700 font-semibold"
+                        : opt === selected
+                        ? "border-red-500 bg-red-50 text-red-700"
+                        : "border-gray-300 bg-gray-50 text-gray-500"
+                      : "border-gray-300 bg-gray-50 hover:border-blue-400 hover:bg-blue-50"
+                  }`}
+                >
+                  {opt}
+                </button>
+              ))}
 
               {q.type === "truefalse" &&
                 ["true", "false"].map((opt) => (
@@ -149,7 +113,6 @@ export default function QuizResultList() {
                   </button>
                 ))}
 
-              {/* Short Question Input */}
               {q.type === "short" && (
                 <div className="space-y-3">
                   <input
@@ -173,7 +136,6 @@ export default function QuizResultList() {
                 </div>
               )}
 
-              {/* Answer Reveal */}
               {selected && (
                 <div
                   className={`mt-4 flex items-center space-x-2 p-3 rounded-lg border ${

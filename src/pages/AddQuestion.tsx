@@ -3,6 +3,7 @@ import { BookOpen, HelpCircle } from "lucide-react";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import LabeledInput from "@/components/ui/InputWithLabel";
 import { toast } from "sonner";
+import { useAddQuestionMutation } from "@/redux/features/examGenerator/examGeneratorApi";
 
 export type QuestionType = "mcq" | "short" | "truefalse";
 export type Difficulty = "easy" | "medium" | "hard";
@@ -37,23 +38,48 @@ const AddQuestion = () => {
       type: "mcq",
       difficulty: "easy",
       question: "",
-      options: ["", "", "", ""], // default 4 options
+      options: ["", "", "", ""],
       answer: "",
     },
   });
 
   const questionType = watch("type");
-  const options = watch("options") as string[]; // live watch on options
+  const options = (watch("options") || []) as string[];
+
+  const [addQuestion] = useAddQuestionMutation();
 
   const onSubmit: SubmitHandler<IQuestion> = async (data) => {
     try {
+      // Type narrowing
+      let payload: IQuestion = { ...data };
+
       if (data.type === "mcq") {
-        data.options = data.options.filter((opt) => opt.trim() !== "");
+        const mcqData = data as MCQQuestion;
+        const filteredOptions = mcqData.options.filter((opt) => opt.trim() !== "");
+
+        if (filteredOptions.length < 2) {
+          toast.error("MCQ must have at least 2 options.");
+          return;
+        }
+
+        if (!mcqData.answer || !filteredOptions.includes(mcqData.answer)) {
+          toast.error("Please select a valid correct answer.");
+          return;
+        }
+
+        payload = { ...mcqData, options: filteredOptions };
       }
-      console.log("Generated Question Data:", data);
+
+      await addQuestion(payload);
       toast.success("Question added successfully!");
-      reset();
-    } catch {
+      reset({
+        type: "mcq",
+        difficulty: "easy",
+        question: "",
+        options: ["", "", "", ""],
+        answer: "",
+      });
+    } catch (err) {
       toast.error("Failed to add question.");
     }
   };
@@ -133,7 +159,7 @@ const AddQuestion = () => {
                 </div>
               </div>
 
-              {/* Correct Answer (Dropdown from Options) */}
+              {/* Correct Answer */}
               <div>
                 <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
                   Correct Answer
@@ -141,10 +167,11 @@ const AddQuestion = () => {
                 <select
                   {...register("answer")}
                   required
+                  disabled={!options.some((o) => o.trim() !== "")}
                   className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600"
                 >
                   <option value="">Select correct answer</option>
-                  {options?.map(
+                  {options.map(
                     (opt, i) =>
                       opt.trim() && (
                         <option key={i} value={opt}>
