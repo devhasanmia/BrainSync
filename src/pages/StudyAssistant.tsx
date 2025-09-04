@@ -60,11 +60,11 @@ const PomodoroSection = ({ metadata }: { metadata?: any }) => {
 
   return (
     <div className="space-y-6">
-      <div className="p-6 bg-white rounded-2xl shadow-md space-y-4">
-        <h2 className="text-xl font-semibold text-center">Pomodoro Timer</h2>
+      <div className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-md space-y-4">
+        <h2 className="text-xl font-semibold text-center text-gray-800 dark:text-gray-100">Pomodoro Timer</h2>
 
         {/* Timer Display */}
-        <div className="flex items-center justify-center text-4xl font-mono font-bold">
+        <div className="flex items-center justify-center text-4xl font-mono font-bold text-gray-900 dark:text-white">
           {formatTime(seconds)}
         </div>
 
@@ -77,7 +77,7 @@ const PomodoroSection = ({ metadata }: { metadata?: any }) => {
               className={`px-5 py-2 rounded-lg border text-sm font-medium transition-colors ${
                 sessionType === type
                   ? 'bg-blue-500 text-white border-blue-500'
-                  : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -94,7 +94,7 @@ const PomodoroSection = ({ metadata }: { metadata?: any }) => {
               className={`px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${
                 selectedMinutes === option
                   ? 'bg-blue-500 text-white border-blue-500'
-                  : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               {option} min
@@ -125,10 +125,10 @@ const PomodoroSection = ({ metadata }: { metadata?: any }) => {
           <select
             value={selectedSubject}
             onChange={handleSubjectChange}
-            className="px-4 py-2 border rounded-lg shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="px-4 py-2 border rounded-lg shadow-sm text-gray-700 dark:text-white dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
             {sTask.map((item: any, idx: number) => (
-              <option key={idx} value={item.subject}>
+              <option key={idx} value={item.subject} className="dark:bg-gray-700 dark:text-white">
                 {item.subject}
               </option>
             ))}
@@ -146,8 +146,8 @@ const PomodoroSection = ({ metadata }: { metadata?: any }) => {
           subtitle="count"
         />
         <StatsCard
-          title="Pomodoro Focus Time"
-          value={metadata?.todayFocusTime ?? 0}
+          title="Today Focus Time"
+          value={metadata?.todayFocusTimeFormatted ?? 0}
           icon={Clock}
           color="purple"
           subtitle="minutes"
@@ -217,22 +217,22 @@ const StudyAssistant = () => {
         <PomodoroSection metadata={metadata} />
 
         {/* Right Column: Today's Study History */}
-        <div className="p-6 bg-white rounded-2xl shadow-md max-h-[600px] overflow-y-auto">
-          <h2 className="text-xl font-semibold mb-4 text-center">Today's Study History</h2>
+        <div className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-md max-h-[600px] overflow-y-auto">
+          <h2 className="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-gray-100">Today's Study History</h2>
           <ul className="space-y-4">
             {sessions.length === 0 && (
-              <li className="text-center text-gray-500">No sessions today</li>
+              <li className="text-center text-gray-500 dark:text-gray-400">No sessions today</li>
             )}
             {sessions.map((session: any) => (
               <li
                 key={session._id}
-                className="flex justify-between items-center p-4 bg-gray-50 rounded-lg"
+                className="flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
               >
                 <div>
-                  <p className="font-medium">{session.studyTask}</p>
-                  <p className="text-sm text-gray-500">{session.type}</p>
+                  <p className="font-medium text-gray-900 dark:text-white">{session.studyTask}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-300">{session.type}</p>
                 </div>
-                <div className="text-right">
+                <div className="text-right text-gray-900 dark:text-white">
                   <p className="font-semibold">{session.duration} min</p>
                 </div>
               </li>
@@ -243,6 +243,5 @@ const StudyAssistant = () => {
     </div>
   )
 }
-
 
 export default StudyAssistant

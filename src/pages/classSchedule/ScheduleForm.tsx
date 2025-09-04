@@ -6,6 +6,7 @@ import { classScheduleValidationSchema } from "./classScheduleValidation";
 import { colors, days } from "./classSchedule.constent";
 import LabeledInput from "@/components/ui/InputWithLabel";
 import PrimaryButton from "@/components/ui/PrimaryButton";
+import LabeledSelect from "@/components/ui/LabeledSelect";
 
 type ScheduleFormInputs = z.infer<typeof classScheduleValidationSchema>;
 
@@ -21,6 +22,7 @@ const ScheduleForm = ({ mode, defaultValues, onSubmit }: ScheduleFormProps) => {
     handleSubmit,
     watch,
     setValue,
+    control,
     formState: { errors },
   } = useForm<ScheduleFormInputs>({
     resolver: zodResolver(classScheduleValidationSchema),
@@ -33,11 +35,12 @@ const ScheduleForm = ({ mode, defaultValues, onSubmit }: ScheduleFormProps) => {
     <div className="space-y-6">
       <div className="flex items-center justify-center from-blue-50 via-indigo-100 to-purple-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-6">
         <div className="w-full max-w-2xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-gray-700">
-
           {/* Header */}
           <div className="text-center mb-6">
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {mode === "add" ? "Add New Class Schedule" : "Update Class Schedule"}
+              {mode === "add"
+                ? "Add New Class Schedule"
+                : "Update Class Schedule"}
             </h1>
             <p className="text-gray-500 dark:text-gray-400 text-sm">
               {mode === "add"
@@ -69,25 +72,14 @@ const ScheduleForm = ({ mode, defaultValues, onSubmit }: ScheduleFormProps) => {
             />
 
             {/* Day */}
-            <div>
-              <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
-                Day
-              </label>
-              <select
-                {...register("day")}
-                className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600"
-              >
-                <option value="">Select day</option>
-                {days.map((day) => (
-                  <option key={day} value={day}>
-                    {day}
-                  </option>
-                ))}
-              </select>
-              {errors.day?.message && (
-                <p className="text-sm text-red-500 mt-1">{errors.day.message}</p>
-              )}
-            </div>
+            <LabeledSelect
+              label="Day"
+              name="day"
+              control={control}
+              options={days.map((day) => ({ value: day, label: day }))}
+              required
+              error={errors.day?.message}
+            />
 
             {/* Time */}
             <div className="grid grid-cols-2 gap-4">
@@ -141,7 +133,9 @@ const ScheduleForm = ({ mode, defaultValues, onSubmit }: ScheduleFormProps) => {
                 ))}
               </div>
               {errors.color?.message && (
-                <p className="text-sm text-red-500 mt-1">{errors.color.message}</p>
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.color.message}
+                </p>
               )}
             </div>
 

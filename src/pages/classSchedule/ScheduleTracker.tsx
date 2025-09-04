@@ -1,11 +1,11 @@
 import { Plus, Edit2, Trash2, Clock, MapPin, User } from "lucide-react";
-import type { Class } from "../types";
-import { useDeleteClassScheduleMutation, useGetAllScheduleQuery } from "../redux/features/classSchedule/classScheduleApi";
-import Loading from "../components/ui/Loading";
 import { Link } from "react-router";
-import { days } from "./classSchedule/classSchedule.constent";
 import { toast } from "sonner";
 import PageHeader from "@/components/ui/PageHeader";
+import { useDeleteClassScheduleMutation, useGetAllScheduleQuery } from "@/redux/features/classSchedule/classScheduleApi";
+import type { Class } from "@/types";
+import Loading from "@/components/ui/Loading";
+import { days } from "./classSchedule.constent";
 
 export function ScheduleTracker() {
   const { data: schedules, isLoading } = useGetAllScheduleQuery("");

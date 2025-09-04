@@ -60,7 +60,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, isMobile, onClose }) => {
     {
       icon: FileQuestion,
       label: "Exam Q&A generator",
-      path: "/dashboard/quiz-generator",
+      path: "/dashboard/exam-generator",
     },
     {
       icon: Brain,

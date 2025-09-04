@@ -3,9 +3,6 @@ import App from "../App";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import { ProtecctedRoute } from "../components/layouts/ProtecctedRoute";
-import { ScheduleTracker } from "../pages/ScheduleTracker";
-import { StudyPlanner } from "../pages/StudyPlanner";
-import { BudgetTracker } from "../pages/BudgetTracker";
 import Dashboard from "../pages/Dashboard";
 import AuthLayout from "../components/layouts/AuthLayout";
 import AddSchedule from "@/pages/classSchedule/AddSchedule";
@@ -13,9 +10,13 @@ import EditSchedule from "@/pages/classSchedule/EditSchedule";
 import AddBudget from "@/pages/budgetTracker/AddBudget";
 import AddStudyTask from "@/pages/studyPlanner/addStudyTask";
 import EditStudyTask from "@/pages/studyPlanner/EditStudyTask";
-import AddQuestion from "@/pages/AddQuestion";
-import QuizSettingsForm from "@/pages/ExamQ&AGenerator";
+
 import StudyAssistant from "@/pages/StudyAssistant";
+import AddQuestion from "@/pages/exam/AddQuestion";
+import QuizSettingsForm from "@/pages/exam/ExamQ&AGenerator";
+import { BudgetTracker } from "@/pages/budgetTracker/BudgetTracker";
+import { ScheduleTracker } from "@/pages/classSchedule/ScheduleTracker";
+import { StudyPlanner } from "@/pages/studyPlanner/StudyPlanner";
 
 const router = createBrowserRouter([
   {
@@ -85,7 +86,7 @@ const router = createBrowserRouter([
         element: < AddQuestion />,
       },
       {
-        path: "quiz-generator",
+        path: "exam-generator",
         element: <QuizSettingsForm/>,
       },
     ],

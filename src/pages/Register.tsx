@@ -9,17 +9,21 @@ import { useRegisterMutation } from "../redux/features/auth/authApi";
 import { toast } from "sonner";
 
 const registerSchema = z.object({
-  name: z.string({ error: 'Name is required' }).min(1, { error: 'Name is required' }),
-  email: z.email({ error: 'Invalid email address' }).min(1, { error: 'Email is required' }),
+  name: z
+    .string({ error: "Name is required" })
+    .min(1, { error: "Name is required" }),
+  email: z
+    .email({ error: "Invalid email address" })
+    .min(1, { error: "Email is required" }),
   phone: z
-    .string({ error: 'Phone is required' })
-    .min(1, { error: 'Phone is required' })
-    .regex(/^01\d{9}$/, { error: 'Phone number must be 11 digits and start with 01' }),
-  password: z.string({ error: 'Password is required' })
-    .min(6, { error: 'Password must be at least 6 characters long' }),
-  role: z.enum(['user', 'agent'], {
-    error: "Role must be one of 'user', 'agent'",
-  }),
+    .string({ error: "Phone is required" })
+    .min(1, { error: "Phone is required" })
+    .regex(/^01\d{9}$/, {
+      error: "Phone number must be 11 digits and start with 01",
+    }),
+  password: z
+    .string({ error: "Password is required" })
+    .min(6, { error: "Password must be at least 6 characters long" }),
 });
 
 type RegisterFormInputs = z.infer<typeof registerSchema>;
@@ -100,27 +104,6 @@ const Register = () => {
             register={register}
             error={errors.password?.message}
           />
-
-          {/* Role Selection */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Select Role
-            </label>
-            <div className="relative">
-              <ShieldCheck className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <select
-                id="role"
-                {...register("role")}
-                className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white text-sm placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none shadow-sm"
-              >
-                <option value="user">User</option>
-                <option value="agent">Agent</option>
-              </select>
-            </div>
-            {errors.role && (
-              <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>
-            )}
-          </div>
 
           <PrimaryButton type="submit" icon={<ShieldCheck />}>
             Register

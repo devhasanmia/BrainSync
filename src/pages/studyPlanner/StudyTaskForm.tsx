@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { BookOpen, FileText, Clock } from "lucide-react";
 import LabeledInput from "@/components/ui/InputWithLabel";
 import PrimaryButton from "@/components/ui/PrimaryButton";
+import LabeledSelect from "@/components/ui/LabeledSelect";
 
 // Validation schema using zod
 export const studyTaskValidationSchema = z.object({
@@ -24,10 +25,15 @@ interface StudyTaskFormProps {
   onSubmit: SubmitHandler<StudyTaskFormInputs>;
 }
 
-const StudyTaskForm = ({ mode, defaultValues, onSubmit }: StudyTaskFormProps) => {
+const StudyTaskForm = ({
+  mode,
+  defaultValues,
+  onSubmit,
+}: StudyTaskFormProps) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<StudyTaskFormInputs>({
     resolver: zodResolver(studyTaskValidationSchema),
@@ -82,23 +88,18 @@ const StudyTaskForm = ({ mode, defaultValues, onSubmit }: StudyTaskFormProps) =>
               error={errors.description?.message}
             />
 
-            <div>
-              <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
-                Priority
-              </label>
-              <select
-                {...register("priority")}
-                className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600"
-              >
-                <option value="">Select priority</option>
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
-              {errors.priority?.message && (
-                <p className="text-sm text-red-500 mt-1">{errors.priority.message}</p>
-              )}
-            </div>
+            <LabeledSelect
+              label="Priority"
+              name="priority"
+              control={control}
+              options={[
+                { value: "low", label: "Low" },
+                { value: "medium", label: "Medium" },
+                { value: "high", label: "High" },
+              ]}
+              required
+              error={errors.priority?.message}
+            />
 
             <LabeledInput
               label="Deadline"

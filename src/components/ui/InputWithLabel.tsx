@@ -21,13 +21,13 @@ const LabeledInput: React.FC<LabeledInputProps> = ({
   icon,
   register,
   error,
-  required
+  required,
 }) => {
   return (
     <div className="mb-4">
       <label
         htmlFor={name}
-        className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300 transition-colors duration-300"
       >
         {label}
       </label>
@@ -44,11 +44,14 @@ const LabeledInput: React.FC<LabeledInputProps> = ({
           className={`w-full ${
             icon ? "pl-10" : "pl-4"
           } pr-4 py-3 rounded-xl border 
-            ${error ? "border-red-500 focus:ring-red-500 focus:border-red-500" : "border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"} 
-            dark:bg-gray-700 dark:text-white placeholder-gray-400 
-            transition outline-none shadow-sm`}
+            ${error
+              ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+              : "border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"}
+            dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 
+            placeholder-gray-400
+            transition-colors outline-none shadow-sm`}
           {...register(name)}
-          required = {required}
+          required={required}
         />
       </div>
       {error && <p className="mt-1 text-sm text-red-500">{error}</p>}

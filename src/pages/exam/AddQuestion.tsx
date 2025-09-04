@@ -50,7 +50,6 @@ const AddQuestion = () => {
 
   const onSubmit: SubmitHandler<IQuestion> = async (data) => {
     try {
-      // Type narrowing
       let payload: IQuestion = { ...data };
 
       if (data.type === "mcq") {
@@ -86,14 +85,18 @@ const AddQuestion = () => {
 
   return (
     <div className="flex items-center justify-center p-6">
-      <div className="w-full max-w-xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-gray-700">
+      <div className="w-full max-w-xl bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700 transition-colors">
+        {/* Header */}
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Add Exam Question</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Add Exam Question
+          </h1>
           <p className="text-gray-500 dark:text-gray-400 text-sm">
             Fill in the details to create a question
           </p>
         </div>
 
+        {/* Form */}
         <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
           {/* Question Type */}
           <div>
@@ -103,7 +106,9 @@ const AddQuestion = () => {
             <select
               {...register("type")}
               required
-              className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600"
+              className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-400 
+                         bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
+                         border-gray-300 dark:border-gray-600"
             >
               <option value="mcq">Multiple Choice</option>
               <option value="short">Short Answer</option>
@@ -119,7 +124,9 @@ const AddQuestion = () => {
             <select
               {...register("difficulty")}
               required
-              className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600"
+              className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-400 
+                         bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
+                         border-gray-300 dark:border-gray-600"
             >
               <option value="easy">Easy</option>
               <option value="medium">Medium</option>
@@ -153,7 +160,9 @@ const AddQuestion = () => {
                       type="text"
                       {...register(`options.${i}` as const)}
                       placeholder={`Option ${i + 1}`}
-                      className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600"
+                      className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-400 
+                                 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
+                                 border-gray-300 dark:border-gray-600"
                     />
                   ))}
                 </div>
@@ -168,7 +177,9 @@ const AddQuestion = () => {
                   {...register("answer")}
                   required
                   disabled={!options.some((o) => o.trim() !== "")}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-400 
+                             bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
+                             border-gray-300 dark:border-gray-600"
                 >
                   <option value="">Select correct answer</option>
                   {options.map(
@@ -204,7 +215,9 @@ const AddQuestion = () => {
               <select
                 {...register("answer")}
                 required
-                className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600"
+                className="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-400 
+                           bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
+                           border-gray-300 dark:border-gray-600"
               >
                 <option value="true">True</option>
                 <option value="false">False</option>
