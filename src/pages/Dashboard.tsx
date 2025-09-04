@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Calendar, DollarSign, Target, TrendingUp, Clock, Activity } from 'lucide-react';
 import { StatsCard } from '../components/ui/StatsCard';
 import { useGetTodayScheduleQuery } from '@/redux/features/classSchedule/classScheduleApi';
@@ -12,17 +11,6 @@ const Dashboard = () => {
   const { data: budgetTracker } = useGetAllbudgetQuery("")
   const { data: metadatas } = useGetStudySessionQuery('')
   const metadata = metadatas?.data?.metadata
-
-  const [stats, setStats] = useState({
-    totalClasses: 0,
-    todayClasses: 0,
-    totalBudget: 0,
-    monthlyExpenses: 0,
-    activeTasks: 0,
-    completedTasks: 0,
-    studyHours: 0,
-    studyStreak: 0,
-  });
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
