@@ -58,15 +58,15 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, isMobile, onClose }) => {
       path: "/dashboard/study-planner",
     },
     {
-      icon: Brain,
-      label: "Study Assistant",
-      path: "/dashboard/study-assistant",
-    },
-    {
       icon: FileQuestion,
       label: "Exam Q&A generator",
       path: "/dashboard/quiz-generator",
     },
+    {
+      icon: Brain,
+      label: "Study Assistant",
+      path: "/dashboard/study-assistant",
+    }
   ];
 
   return (
@@ -92,7 +92,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, isMobile, onClose }) => {
                   Brain <span className="text-blue-400">Sync</span>
                 </h1>
                 <p className="text-xs text-white/60 mt-0.5">
-                  Current version: v1.0.0
+                  Current version: v2.0.0
                 </p>
               </div>
             )}

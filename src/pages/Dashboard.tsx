@@ -123,10 +123,10 @@ const Dashboard = () => {
                 </div>
                 <div>
                   <p className="font-medium text-gray-800">Tasks Completed</p>
-                  <p className="text-sm text-gray-600">This week</p>
+                  <p className="text-sm text-gray-600">Total</p>
                 </div>
               </div>
-              <p className="text-xl font-bold text-blue-600">{stats.completedTasks}</p>
+              <p className="text-xl font-bold text-blue-600">{studyPlanner?.data?.metadata?.completedTasks}</p>
             </div>
 
             <div className="flex items-center justify-between p-4 bg-purple-50 rounded-lg">

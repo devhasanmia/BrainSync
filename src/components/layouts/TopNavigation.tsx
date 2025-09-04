@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Menu, Bell, Moon, Sun, User, ChevronDown } from "lucide-react";
+import { Menu, Moon, Sun, User, ChevronDown } from "lucide-react";
 import { useProfileQuery } from "../../redux/features/auth/authApi";
 
 interface TopNavigationProps {

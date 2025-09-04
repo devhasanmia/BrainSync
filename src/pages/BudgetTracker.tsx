@@ -23,7 +23,7 @@ interface BudgetMetadata {
   totalEntries: number;
 }
 
-const COLORS = ['#4ade80', '#f87171']; // Income=green, Expense=red
+const COLORS = ['#4ade80', '#f87171']; 
 
 export function BudgetTracker() {
   const { data: budgets, isLoading } = useGetAllbudgetQuery('');

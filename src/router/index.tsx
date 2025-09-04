@@ -5,7 +5,6 @@ import Register from "../pages/Register";
 import { ProtecctedRoute } from "../components/layouts/ProtecctedRoute";
 import { ScheduleTracker } from "../pages/ScheduleTracker";
 import { StudyPlanner } from "../pages/StudyPlanner";
-import { StudyAssistant } from "../pages/StudyAssistant";
 import { BudgetTracker } from "../pages/BudgetTracker";
 import Dashboard from "../pages/Dashboard";
 import AuthLayout from "../components/layouts/AuthLayout";
@@ -16,6 +15,7 @@ import AddStudyTask from "@/pages/studyPlanner/addStudyTask";
 import EditStudyTask from "@/pages/studyPlanner/EditStudyTask";
 import AddQuestion from "@/pages/AddQuestion";
 import QuizSettingsForm from "@/pages/ExamQ&AGenerator";
+import { StudyAssistant } from "@/pages/StudyAssistant";
 
 const router = createBrowserRouter([
   {
