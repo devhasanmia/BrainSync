@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { Calendar, DollarSign,Target, TrendingUp, Clock } from 'lucide-react';
 import { StatsCard } from '../components/ui/StatsCard';
-import type { Class } from '../types';
-import { useProfileQuery } from '../redux/features/auth/authApi';
 import { useGetTodayScheduleQuery } from '@/redux/features/classSchedule/classScheduleApi';
+import { useGetAllStudyPlannerQuery } from '@/redux/features/studyPlanner/studyPlannerApi';
+import { useGetAllbudgetQuery } from '@/redux/features/budgetTracker/budgetTrackerApi';
 
 const Dashboard = () => {
   const {data: todayClass} = useGetTodayScheduleQuery("");
+  const {data: studyPlanner} = useGetAllStudyPlannerQuery("");
+  const {data: budgetTracker } = useGetAllbudgetQuery("")
 
   const [stats, setStats] = useState({
     totalClasses: 0,
@@ -47,17 +49,17 @@ const Dashboard = () => {
         />
         <StatsCard
           title="Current Budget"
-          value={`$${stats.totalBudget.toFixed(2)}`}
+          value={`$${budgetTracker?.data?.metadata?.currentBalance.toFixed(2)}`}
           icon={DollarSign}
           color="green"
-          subtitle={`$${stats.monthlyExpenses.toFixed(2)} this month`}
+          subtitle={`$${budgetTracker?.data?.metadata?.totalExpenses.toFixed(2)} Total Expenses`}
         />
         <StatsCard
           title="Active Tasks"
-          value={stats.activeTasks}
+          value={studyPlanner?.data?.metadata?.pendingTasks}
           icon={Target}
           color="orange"
-          subtitle={`${stats.completedTasks} completed`}
+          subtitle={`${studyPlanner?.data?.metadata?.completedTasks} completed`}
         />
         <StatsCard
           title="Study Hours"
