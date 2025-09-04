@@ -10,13 +10,13 @@ import EditSchedule from "@/pages/classSchedule/EditSchedule";
 import AddBudget from "@/pages/budgetTracker/AddBudget";
 import AddStudyTask from "@/pages/studyPlanner/addStudyTask";
 import EditStudyTask from "@/pages/studyPlanner/EditStudyTask";
-
-import StudyAssistant from "@/pages/StudyAssistant";
 import AddQuestion from "@/pages/exam/AddQuestion";
 import QuizSettingsForm from "@/pages/exam/ExamQ&AGenerator";
 import { BudgetTracker } from "@/pages/budgetTracker/BudgetTracker";
 import { ScheduleTracker } from "@/pages/classSchedule/ScheduleTracker";
 import { StudyPlanner } from "@/pages/studyPlanner/StudyPlanner";
+import StudyAssistant from "@/pages/studyAssistant/StudyAssistant";
+import Home from "@/pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Login />,
+        element: <Home />,
       },
       {
         path: "login",
@@ -79,7 +79,7 @@ const router = createBrowserRouter([
       },
       {
         path: "study-assistant",
-        element: <StudyAssistant />,
+        element: <StudyAssistant/>,
       },
       {
         path: "add-question",
