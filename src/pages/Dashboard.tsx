@@ -1,14 +1,17 @@
 import { useState } from 'react';
-import { Calendar, DollarSign,Target, TrendingUp, Clock } from 'lucide-react';
+import { Calendar, DollarSign, Target, TrendingUp, Clock, Activity } from 'lucide-react';
 import { StatsCard } from '../components/ui/StatsCard';
 import { useGetTodayScheduleQuery } from '@/redux/features/classSchedule/classScheduleApi';
 import { useGetAllStudyPlannerQuery } from '@/redux/features/studyPlanner/studyPlannerApi';
 import { useGetAllbudgetQuery } from '@/redux/features/budgetTracker/budgetTrackerApi';
+import { useGetStudySessionQuery } from '@/redux/features/studyAssistant/studyAssistantApi';
 
 const Dashboard = () => {
-  const {data: todayClass} = useGetTodayScheduleQuery("");
-  const {data: studyPlanner} = useGetAllStudyPlannerQuery("");
-  const {data: budgetTracker } = useGetAllbudgetQuery("")
+  const { data: todayClass } = useGetTodayScheduleQuery("");
+  const { data: studyPlanner } = useGetAllStudyPlannerQuery("");
+  const { data: budgetTracker } = useGetAllbudgetQuery("")
+  const { data: metadatas } = useGetStudySessionQuery('')
+  const metadata = metadatas?.data?.metadata
 
   const [stats, setStats] = useState({
     totalClasses: 0,
@@ -62,11 +65,11 @@ const Dashboard = () => {
           subtitle={`${studyPlanner?.data?.metadata?.completedTasks} completed`}
         />
         <StatsCard
-          title="Study Hours"
-          value={`${stats.studyHours}h`}
-          icon={Clock}
-          color="purple"
-          subtitle="This week"
+          title="Week Focus Time"
+          value={(metadata?.weekFocusTimeFormatted ?? 0)}
+          icon={Activity}
+          color="red"
+          subtitle="time"
         />
       </div>
 
@@ -135,11 +138,11 @@ const Dashboard = () => {
                   <Clock className="h-4 w-4" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-800">Focus Time</p>
+                  <p className="font-medium text-gray-800">Today Focus Time</p>
                   <p className="text-sm text-gray-600">Total hours</p>
                 </div>
               </div>
-              <p className="text-xl font-bold text-purple-600">{stats.studyHours}h</p>
+              <p className="text-xl font-bold text-purple-600">{metadata?.todayFocusTimeFormatted}</p>
             </div>
           </div>
         </div>

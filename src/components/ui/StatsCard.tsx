@@ -24,6 +24,7 @@ const bgColorClasses = {
   purple: 'bg-purple-50',
   red: 'bg-red-50',
   teal: 'bg-teal-50',
+  yellow: 'bg-yellow-50'
 };
 
 export function StatsCard({ title, value, icon: Icon, color, subtitle }: StatsCardProps) {
