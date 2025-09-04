@@ -16,7 +16,6 @@ import { BudgetTracker } from "@/pages/budgetTracker/BudgetTracker";
 import { ScheduleTracker } from "@/pages/classSchedule/ScheduleTracker";
 import { StudyPlanner } from "@/pages/studyPlanner/StudyPlanner";
 import StudyAssistant from "@/pages/studyAssistant/StudyAssistant";
-import Home from "@/pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +24,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Home />,
+        element: <Login />,
       },
       {
         path: "login",
@@ -79,7 +78,7 @@ const router = createBrowserRouter([
       },
       {
         path: "study-assistant",
-        element: <StudyAssistant/>,
+        element: <StudyAssistant />,
       },
       {
         path: "add-question",
@@ -87,7 +86,7 @@ const router = createBrowserRouter([
       },
       {
         path: "exam-generator",
-        element: <QuizSettingsForm/>,
+        element: <QuizSettingsForm />,
       },
     ],
   },
