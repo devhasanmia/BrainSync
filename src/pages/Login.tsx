@@ -33,7 +33,7 @@ const Login = () => {
   });
 
   const { data: authUser } = useProfileQuery("");
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation(); // <-- added isLoading
 
   // Redirect if already logged in
   if (authUser?.data?.email) {
@@ -104,8 +104,8 @@ const Login = () => {
           </div>
 
           {/* Submit Button */}
-          <PrimaryButton type="submit" icon={<Lock />}>
-            Login
+          <PrimaryButton type="submit" icon={<Lock />} disabled={isLoading}>
+            {isLoading ? "Logging in..." : "Login"}
           </PrimaryButton>
 
           <p className="text-xs text-center text-gray-500 dark:text-gray-400">

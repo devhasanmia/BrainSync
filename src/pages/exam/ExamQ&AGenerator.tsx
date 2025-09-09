@@ -46,7 +46,7 @@ export default function QuizSettingsForm() {
     }
   };
 
-  const [setQuestionSetting, { data: genaretedQuestion }] =
+  const [setQuestionSetting, { data: genaretedQuestion, isLoading }] =
     useGenerateExamMutation();
 
   const handleGenerateQuiz = async () => {
@@ -151,9 +151,10 @@ export default function QuizSettingsForm() {
           <PrimaryButton
             className="w-full flex items-center justify-center"
             onClick={handleGenerateQuiz}
+            disabled={isLoading}
           >
             <HelpCircle className="h-4 w-4 inline mr-2" />
-            Generate Quiz
+            {isLoading ? "Generating..." : "Generate"}
           </PrimaryButton>
         </div>
 
@@ -162,7 +163,18 @@ export default function QuizSettingsForm() {
           <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
             Result
           </h2>
-          {genaretedQuestion?.data?.data?.length ? (
+
+          {isLoading ? (
+            // ✅ Skeleton Loader
+            <div className="space-y-4">
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="h-16 bg-gray-200 dark:bg-slate-700 animate-pulse rounded-lg"
+                ></div>
+              ))}
+            </div>
+          ) : genaretedQuestion?.data?.data?.length ? (
             <QuizResultList questions={genaretedQuestion.data.data} />
           ) : (
             <p className="text-gray-500 dark:text-gray-400">

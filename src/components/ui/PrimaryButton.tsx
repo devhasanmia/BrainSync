@@ -6,6 +6,7 @@ interface PrimaryButtonProps {
   children: React.ReactNode;
   icon?: React.ReactNode;
   className?: string;
+  disabled?: boolean;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
@@ -14,11 +15,13 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   children,
   icon,
   className = "",
+  disabled = false
 }) => {
   return (
     <button
       type={type}
       onClick={onClick}
+      disabled = {disabled}
       className={`w-full py-3 px-4 bg-gradient-to-r cursor-pointer from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl shadow-lg transition flex items-center justify-center gap-2 ${className}`}
     >
       {icon && <span className="w-5 h-5">{icon}</span>}

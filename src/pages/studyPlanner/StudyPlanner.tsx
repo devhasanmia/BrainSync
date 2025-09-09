@@ -8,8 +8,8 @@ import {
 import PageHeader from '@/components/ui/PageHeader';
 import { Link } from 'react-router';
 import type { StudyTask } from '@/types';
-import Loading from '@/components/ui/Loading';
 import { StatsCard } from '@/components/ui/StatsCard';
+import { toast } from "sonner"; 
 
 export function StudyPlanner() {
     const [tasks, setTasks] = useState<StudyTask[]>([]);
@@ -41,7 +41,9 @@ export function StudyPlanner() {
         try {
             await updateTask({ id: task.id, payload: { completed: !task.completed } }).unwrap();
             setTasks(tasks.map(t => t.id === task.id ? { ...t, completed: !t.completed } : t));
+            toast.success(task.completed ? "Task marked as incomplete" : "Task marked as completed");
         } catch (error) {
+            toast.error("Failed to update task");
             console.error("Failed to update task", error);
         }
     };
@@ -51,7 +53,9 @@ export function StudyPlanner() {
         try {
             await deleteTask(taskId).unwrap();
             setTasks(tasks.filter(t => t.id !== taskId));
+            toast.success("Task deleted successfully");
         } catch (error) {
+            toast.error("Failed to delete task");
             console.error("Failed to delete task", error);
         }
     };
@@ -72,9 +76,35 @@ export function StudyPlanner() {
         }
     };
 
-    const isOverdue = (deadline: string) => new Date(deadline) < new Date() && new Date(deadline).toDateString() !== new Date().toDateString();
+    const isOverdue = (deadline: string) =>
+        new Date(deadline) < new Date() && new Date(deadline).toDateString() !== new Date().toDateString();
 
-    if (isLoading) return <Loading />;
+    if (isLoading) {
+        return (
+            <div className="space-y-6">
+                <PageHeader
+                    title="Study Planner"
+                    subtitle="Organize and track your study tasks"
+                    buttonText="Add Task"
+                    buttonLink="/dashboard/add-study-task"
+                    icon={Plus}
+                />
+                {/* Skeleton while loading */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="h-24 bg-gray-200 dark:bg-slate-700 animate-pulse rounded-xl"></div>
+                    <div className="h-24 bg-gray-200 dark:bg-slate-700 animate-pulse rounded-xl"></div>
+                    <div className="h-24 bg-gray-200 dark:bg-slate-700 animate-pulse rounded-xl"></div>
+                </div>
+                <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm p-6">
+                    <div className="space-y-4">
+                        {[1, 2, 3].map(i => (
+                            <div key={i} className="h-16 bg-gray-200 dark:bg-slate-700 animate-pulse rounded-lg"></div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="space-y-6">
